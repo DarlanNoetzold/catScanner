@@ -1,15 +1,10 @@
-
-print('''\n\n\n
-  ,-.       _,---._ __  / '\'        +--------------------------------------+
- /  )    .-'       `./ /   '\'       |               CatScanner             |
-(  (   ,'            `/    /|       +--------------------------------------+
- \  `-"             '\'\   / |       |        Coder: DarlanNoetzold         |
-  `.              ,  \ \ /  |       |           Version: 1.0               |
-   /`.          ,'-`----Y   |       |           Date: 26/05/2022           |
-  (            ;        |   '       |       GitHub: /DarlanNoetzold        |
-  |  ,-.    ,-'         |  /        +--------------------------------------+
-  |  | (   |            | /         
-  )  |  \  `.___________|/
-  `--'   `--'
-  \n\n\n''')
+import sys
+import argparse
+import subprocess
+import os
+import time
+import threading
+import re
+import random
+from urllib.parse import urlsplit
 
