@@ -104,7 +104,6 @@ class control_program:
 
 control_program = control_program()
 
-# Scanners that will be used and filename rotation (default: enabled (1))
 tools_used_on_scanner = [
     # 1
     ["host", "Host - Checks for existence of IPV6 address.", "host", 1],
