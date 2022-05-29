@@ -1303,3 +1303,18 @@ def logo():
   \n\n\n'''
     print(logo_ascii)
     print(output_bcolors.ENDC)
+
+def vul_info(val):
+    result = ''
+    if val == 'c':
+        result = output_bcolors.BG_CRIT_TXT + " critical " + output_bcolors.ENDC
+    elif val == 'h':
+        result = output_bcolors.BG_HIGH_TXT + " high " + output_bcolors.ENDC
+    elif val == 'm':
+        result = output_bcolors.BG_MED_TXT + " medium " + output_bcolors.ENDC
+    elif val == 'l':
+        result = output_bcolors.BG_LOW_TXT + " low " + output_bcolors.ENDC
+    else:
+        result = output_bcolors.BG_INFO_TXT + " info " + output_bcolors.ENDC
+    return result
+
