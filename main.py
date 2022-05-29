@@ -1360,9 +1360,12 @@ def get_parser_arguments():
                         help='Update RapidScan.')
     parser_arguments.add_argument('-s', '--skip', action='append', default=[],
                         help='Skip some tools', choices=[t[0] for t in tools])
-    parser_arguments.add_argument('-n', '--nospinner', action='store_true',
-                        help='Disable the idle loader/spinner.')
+    parser_arguments.add_argument('-n', '--nocontrol_program', action='store_true',
+                        help='Disable the idle loader.')
     parser_arguments.add_argument('target', nargs='?', metavar='URL', help='URL to scan.', default='', type=str)
     return parser_arguments
 
 args_on_cmd = get_parser_arguments().parse_args()
+
+if args_on_cmd.nocontrol_program:
+    control_program.disabled = True
