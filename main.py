@@ -1318,3 +1318,32 @@ def vul_info(val):
         result = output_bcolors.BG_INFO_TXT + " info " + output_bcolors.ENDC
     return result
 
+def helper():
+    print(output_bcolors.OKBLUE + "Information:" + output_bcolors.ENDC)
+    print("------------")
+    print("\t./main.py example.com: Scans the domain example.com.")
+    print("\t./main.py example.com --skip dmitry --skip theHarvester: Skip the 'dmitry' and 'theHarvester' tests.")
+    print("\t./main.py example.com --nospinner: Disable the idle loader/spinner.")
+    print("\t./main.py --update   : Updates the scanner to the latest version.")
+    print("\t./main.py --help     : Displays this help context.")
+    print(output_bcolors.OKBLUE + "Interactive:" + output_bcolors.ENDC)
+    print("------------")
+    print("\tCtrl+C: Skips current test.")
+    print("\tCtrl+Z: Quits catScanner.")
+    print(output_bcolors.OKBLUE + "Legends:" + output_bcolors.ENDC)
+    print("--------")
+    print("\t[" + proc_high + "]: Scan process may take longer times (not predictable).")
+    print("\t[" + proc_med + "]: Scan process may take less than 10 minutes.")
+    print("\t[" + proc_low + "]: Scan process may take less than a minute or two.")
+    print(output_bcolors.OKBLUE + "Vulnerability Information:" + output_bcolors.ENDC)
+    print("--------------------------")
+    print(
+        "\t" + vul_info('c') + ": Requires immediate attention as it may lead to compromise or service unavailability.")
+    print("\t" + vul_info(
+        'h') + "    : May not lead to an immediate compromise, but there are considerable chances for probability.")
+    print("\t" + vul_info(
+        'm') + "  : Attacker may correlate multiple vulnerabilities of this type to launch a sophisticated attack.")
+    print("\t" + vul_info('l') + "     : Not a serious issue, but it is recommended to tend to the finding.")
+    print("\t" + vul_info(
+        'i') + "    : Not classified as a vulnerability, simply an useful informational alert to be considered.\n")
+
