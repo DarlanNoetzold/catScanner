@@ -1347,3 +1347,7 @@ def helper():
     print("\t" + vul_info(
         'i') + "    : Not classified as a vulnerability, simply an useful informational alert to be considered.\n")
 
+if len(sys.argv) == 1:
+    logo()
+    helper()
+    sys.exit(1)
