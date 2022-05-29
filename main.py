@@ -1268,3 +1268,20 @@ tools = [
     ["davtest"], ["theHarvester"], ["xsser"], ["dnsrecon"], ["fierce"], ["dnswalk"], ["whois"], ["sslyze"], ["lbd"],
     ["golismero"], ["dnsenum"], ["dmitry"], ["davtest"], ["nikto"], ["dnsmap"], ["amass"]
 ]
+
+tool_head_pointer = 0
+runTest = 1
+
+arg1 = 0
+arg2 = 1
+arg3 = 2
+arg4 = 3
+arg5 = 4
+arg6 = 5
+
+vulnerab_list = list()
+vulnerab_num = 0
+vulnerab = 0
+total_elapsed = 0
+vulnerab_avail_tools = 0
+skipped_checks = 0
