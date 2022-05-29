@@ -1351,3 +1351,4 @@ if len(sys.argv) == 1:
     logo()
     helper()
     sys.exit(1)
+def get_parser_arguments():
