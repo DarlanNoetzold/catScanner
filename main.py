@@ -1364,3 +1364,5 @@ def get_parser_arguments():
                         help='Disable the idle loader/spinner.')
     parser_arguments.add_argument('target', nargs='?', metavar='URL', help='URL to scan.', default='', type=str)
     return parser_arguments
+
+args_on_cmd = get_parser_arguments().parse_args()
