@@ -1351,4 +1351,16 @@ if len(sys.argv) == 1:
     logo()
     helper()
     sys.exit(1)
+
 def get_parser_arguments():
+    parser_arguments = argparse.ArgumentParser(add_help=False)
+    parser_arguments.add_argument('-h', '--help', action='store_true',
+                        help='Show help message and exit.')
+    parser_arguments.add_argument('-u', '--update', action='store_true',
+                        help='Update RapidScan.')
+    parser_arguments.add_argument('-s', '--skip', action='append', default=[],
+                        help='Skip some tools', choices=[t[0] for t in tools])
+    parser_arguments.add_argument('-n', '--nospinner', action='store_true',
+                        help='Disable the idle loader/spinner.')
+    parser_arguments.add_argument('target', nargs='?', metavar='URL', help='URL to scan.', default='', type=str)
+    return parser_arguments
