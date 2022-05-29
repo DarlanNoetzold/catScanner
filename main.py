@@ -1284,3 +1284,22 @@ vulnerab_num = 0
 vulnerab = 0
 total_elapsed = 0
 vulnerab_avail_tools = 0
+skipped_checks = 0
+
+def logo():
+    print(output_bcolors.WARNING)
+    logo_ascii = '''\n\n\n
+  ,-.       _,---._ __  / '\'        +--------------------------------------+
+ /  )    .-'       `./ /   '\'       |               CatScanner             |
+(  (   ,'            `/    /|       +--------------------------------------+
+ \  `-"             '\'\   / |       |        Coder: DarlanNoetzold         |
+  `.              ,  \ \ /  |       |           Version: 1.0               |
+   /`.          ,'-`----Y   |       |           Date: 26/05/2022           |
+  (            ;        |   '       |       GitHub: /DarlanNoetzold        |
+  |  ,-.    ,-'         |  /        +--------------------------------------+
+  |  | (   |            | /         
+  )  |  \  `.___________|/
+  `--'   `--'
+  \n\n\n'''
+    print(logo_ascii)
+    print(output_bcolors.ENDC)
