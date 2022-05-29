@@ -1284,4 +1284,3 @@ vulnerab_num = 0
 vulnerab = 0
 total_elapsed = 0
 vulnerab_avail_tools = 0
-skipped_checks = 0
