@@ -1369,3 +1369,8 @@ args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
     control_program.disabled = True
+
+if args_on_cmd.help or (not args_on_cmd.update \
+                           and not args_on_cmd.target):
+    logo()
+    helper()
