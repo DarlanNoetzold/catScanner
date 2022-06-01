@@ -1406,3 +1406,10 @@ elif args_on_cmd.update:
     newversion_hash = subprocess.check_output(cmd, shell=True)
     newversion_hash = newversion_hash.strip()
     if oldversion_hash == newversion_hash:
+        clear()
+        print("\t" + output_bcolors.OKBLUE + "You already have the latest version of CatScanner." + output_bcolors.ENDC)
+    else:
+        clear()
+        print("\t" + output_bcolors.OKGREEN + "CatScanner successfully updated to the latest version." + output_bcolors.ENDC)
+    control_program.stop()
+    sys.exit(1)
