@@ -1374,6 +1374,10 @@ def is_internet_on():
     os.system('rm rs_net > /dev/null 2>&1')
     return val
 
+def clear():
+    sys.stdout.write("\033[F")
+    sys.stdout.write("\033[K")
+
 args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
