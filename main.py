@@ -1386,4 +1386,22 @@ if args_on_cmd.nocontrol_program:
 if args_on_cmd.help or (not args_on_cmd.update \
                            and not args_on_cmd.target):
     logo()
-    helper()
+    helper()elif args_on_cmd.update:
+    logo()
+    print("CatScanner is updating....Please wait.\n")
+    control_program.start()
+    # Checking internet connectivity first...
+    rs_internet_availability = is_internet_on()
+    if rs_internet_availability == 0:
+        print(
+            "\t" + output_bcolors.BG_ERR_TXT + "There seems to be some problem connecting to the internet. Please try again or later." + output_bcolors.ENDC)
+        control_program.stop()
+        sys.exit(1)
+    cmd = 'sha1sum main.py | grep .... | cut -c 1-40'
+    oldversion_hash = subprocess.check_output(cmd, shell=True)
+    oldversion_hash = oldversion_hash.strip()
+    os.system(
+        'wget -N https://raw.githubusercontent.com/DarlanNoetzold/catScanner/main/main.py -O main.py > /dev/null 2>&1')
+    newversion_hash = subprocess.check_output(cmd, shell=True)
+    newversion_hash = newversion_hash.strip()
+    if oldversion_hash == newversion_hash:
