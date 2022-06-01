@@ -1365,6 +1365,15 @@ def get_parser_arguments():
     parser_arguments.add_argument('target', nargs='?', metavar='URL', help='URL to scan.', default='', type=str)
     return parser_arguments
 
+def is_internet_on():
+    os.system('ping -c1 github.com > rs_net 2>&1')
+    if "0% packet loss" in open('rs_net').read():
+        val = 1
+    else:
+        val = 0
+    os.system('rm rs_net > /dev/null 2>&1')
+    return val
+
 args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
