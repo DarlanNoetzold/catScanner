@@ -1357,7 +1357,7 @@ def get_parser_arguments():
     parser_arguments.add_argument('-h', '--help', action='store_true',
                         help='Show help message and exit.')
     parser_arguments.add_argument('-u', '--update', action='store_true',
-                        help='Update RapidScan.')
+                        help='Update CatScanner.')
     parser_arguments.add_argument('-s', '--skip', action='append', default=[],
                         help='Skip some tools', choices=[t[0] for t in tools])
     parser_arguments.add_argument('-n', '--nocontrol_program', action='store_true',
