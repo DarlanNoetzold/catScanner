@@ -1386,7 +1386,8 @@ if args_on_cmd.nocontrol_program:
 if args_on_cmd.help or (not args_on_cmd.update \
                            and not args_on_cmd.target):
     logo()
-    helper()elif args_on_cmd.update:
+    helper()
+elif args_on_cmd.update:
     logo()
     print("CatScanner is updating....Please wait.\n")
     control_program.start()
