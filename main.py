@@ -1413,3 +1413,13 @@ elif args_on_cmd.update:
         print("\t" + output_bcolors.OKGREEN + "CatScanner successfully updated to the latest version." + output_bcolors.ENDC)
     control_program.stop()
     sys.exit(1)
+
+elif args_on_cmd.target:
+    target = create_url(args_on_cmd.target)
+    os.system('rm /tmp/te* > /dev/null 2>&1')
+    os.system('clear')
+    os.system('setterm -cursor off')
+    logo()
+    print(output_bcolors.BG_HEAD_TXT + "[ Checking Available Security Scanning Tools Phase... Initiated. ]" + output_bcolors.ENDC)
+
+    unavail_tools_names = list()
