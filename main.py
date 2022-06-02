@@ -1378,6 +1378,15 @@ def clear():
     sys.stdout.write("\033[F")
     sys.stdout.write("\033[K")
 
+def create_url(url):
+    if not re.match(r'http(s?)\:', url):
+        url = 'http://' + url
+    parsed = urlsplit(url)
+    host = parsed.netloc
+    if host.startswith('www.'):
+        host = host[4:]
+    return host
+
 args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
