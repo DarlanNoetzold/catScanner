@@ -1432,3 +1432,17 @@ elif args_on_cmd.target:
     print(output_bcolors.BG_HEAD_TXT + "[ Checking Available Security Scanning Tools Phase... Initiated. ]" + output_bcolors.ENDC)
 
     unavail_tools_names = list()
+    while (rs_avail_tools < len(tools)):
+        precmd = str(tools[rs_avail_tools][arg1])
+        try:
+            p = subprocess.Popen([precmd], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 shell=True)
+            output, err = p.communicate()
+            val = output + err
+        except:
+            print("\t" + output_bcolors.BG_ERR_TXT + "CatScanner was terminated abruptly..." + output_bcolors.ENDC)
+            sys.exit(1)
+
+                arg1] + output_bcolors.ENDC + output_bcolors.OKGREEN + "...available." + output_bcolors.ENDC)
+        rs_avail_tools = rs_avail_tools + 1
+        clear()
