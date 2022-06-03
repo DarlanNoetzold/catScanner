@@ -1443,6 +1443,21 @@ elif args_on_cmd.target:
             print("\t" + output_bcolors.BG_ERR_TXT + "CatScanner was terminated abruptly..." + output_bcolors.ENDC)
             sys.exit(1)
 
+        if b"not found" in val or tools[rs_avail_tools][arg1] in args_on_cmd.skip:
+            if b"not found" in val:
+                print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
+                    arg1] + output_bcolors.ENDC + output_bcolors.BADFAIL + "...unavailable." + output_bcolors.ENDC)
+            elif tools[rs_avail_tools][arg1] in args_on_cmd.skip:
+                print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
+                    arg1] + output_bcolors.ENDC + output_bcolors.BADFAIL + "...skipped." + output_bcolors.ENDC)
+
+            for scanner_index, scanner_val in enumerate(tools_used_on_scanner):
+                if scanner_val[2] == tools[rs_avail_tools][arg1]:
+                    scanner_val[3] = 0
+                    unavail_tools_names.append(tools[rs_avail_tools][arg1])
+
+        else:
+            print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
                 arg1] + output_bcolors.ENDC + output_bcolors.OKGREEN + "...available." + output_bcolors.ENDC)
         rs_avail_tools = rs_avail_tools + 1
         clear()
