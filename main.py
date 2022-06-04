@@ -1286,6 +1286,10 @@ total_elapsed = 0
 vulnerab_avail_tools = 0
 skipped_checks = 0
 
+
+tool_checks = (len(tools_used_on_scanner) + len(tool_response_about_scanning) + len(tool_status_and_timing)) / 3
+tool_checks = round(tool_checks)
+
 def logo():
     print(output_bcolors.WARNING)
     logo_ascii = '''\n\n\n
