@@ -1476,3 +1476,25 @@ elif args_on_cmd.target:
         print(output_bcolors.BG_HEAD_TXT + "[ Preliminary Scan Phase Initiated... Loaded " + str(
             tool_checks) + " vulnerability checks. ]" + output_bcolors.ENDC)
 
+        while (tool < len(tools_used_on_scanner)):
+            print("[" + tool_status_and_timing[tool][arg3] + tool_status_and_timing[tool][arg4] + "] Deploying " + str(tool + 1) + "/" + str(
+                tool_checks) + " | " + output_bcolors.OKBLUE + tools_used_on_scanner[tool][arg2] + output_bcolors.ENDC, )
+            if tools_used_on_scanner[tool][arg4] == 0:
+                print(output_bcolors.WARNING + "\nScanning Tool Unavailable. Skipping Test...\n" + output_bcolors.ENDC)
+                rs_skipped_checks = rs_skipped_checks + 1
+                tool = tool + 1
+                continue
+            try:
+                control_program.start()
+            except Exception as e:
+                print("\n")
+            scan_start = time.time()
+            temp_file = "/tmp/rapidscan_temp_" + tools_used_on_scanner[tool][arg1]
+            cmd = tools_used_on_scanner[tool][arg1] + target + tools_used_on_scanner[tool][arg2] + " > " + temp_file + " 2>&1"
+
+            try:
+                subprocess.check_output(cmd, shell=True)
+            except KeyboardInterrupt:
+                runTest = 0
+            except:
+                runTest = 1
