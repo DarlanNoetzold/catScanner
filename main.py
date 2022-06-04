@@ -1463,3 +1463,16 @@ elif args_on_cmd.target:
             print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
                 arg1] + output_bcolors.ENDC + output_bcolors.OKGREEN + "...available." + output_bcolors.ENDC)
         rs_avail_tools = rs_avail_tools + 1
+        clear()
+        unavail_tools_names = list(set(unavail_tools_names))
+        if len(unavail_tools_names) == 0:
+            print(
+                "\t" + output_bcolors.OKGREEN + "All Scanning Tools are available. Complete vulnerability checks will be performed by CatScanner." + output_bcolors.ENDC)
+        else:
+            print("\t" + output_bcolors.WARNING + "Some of these tools " + output_bcolors.BADFAIL + str(
+                unavail_tools_names) + output_bcolors.ENDC + output_bcolors.WARNING + " are unavailable or will be skipped. CatScanner will still perform the rest of the tests. Install these tools to fully utilize the functionality of CatScanner." + output_bcolors.ENDC)
+        print(output_bcolors.BG_ENDL_TXT + "[ Checking Available Security Scanning Tools Phase... Completed. ]" + output_bcolors.ENDC)
+        print("\n")
+        print(output_bcolors.BG_HEAD_TXT + "[ Preliminary Scan Phase Initiated... Loaded " + str(
+            tool_checks) + " vulnerability checks. ]" + output_bcolors.ENDC)
+
