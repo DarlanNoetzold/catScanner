@@ -1404,7 +1404,6 @@ elif args_on_cmd.update:
     logo()
     print("CatScanner is updating....Please wait.\n")
     control_program.start()
-    # Checking internet connectivity first...
     rs_internet_availability = is_internet_on()
     if rs_internet_availability == 0:
         print(
@@ -1464,4 +1463,3 @@ elif args_on_cmd.target:
             print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
                 arg1] + output_bcolors.ENDC + output_bcolors.OKGREEN + "...available." + output_bcolors.ENDC)
         rs_avail_tools = rs_avail_tools + 1
-        clear()
