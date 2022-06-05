@@ -1391,6 +1391,24 @@ def create_url(url):
         host = host[4:]
     return host
 
+def timer_displayer(seconds, granularity=3):
+    result = []
+    seconds = seconds + 1
+    for name, count in time_intervals:
+        value = seconds // count
+        if value:
+            seconds -= value * count
+            result.append("{}{}".format(value, name))
+    return ' '.join(result[:granularity])
+
+def vulnerability_tog_infos(v1, v2, v3):
+    print(output_bcolors.BOLD + "Vulnerability Threat Level" + output_bcolors.ENDC)
+    print("\t" + vul_info(v2) + " " + output_bcolors.WARNING + str(tool_response_about_scanning[v1][0]) + output_bcolors.ENDC)
+    print(output_bcolors.BOLD + "Vulnerability Definition" + output_bcolors.ENDC)
+    print("\t" + output_bcolors.BADFAIL + str(tools_fix_vuln_rem[v3 - 1][1]) + output_bcolors.ENDC)
+    print(output_bcolors.BOLD + "Vulnerability Remediation" + output_bcolors.ENDC)
+    print("\t" + output_bcolors.OKGREEN + str(tools_fix_vuln_rem[v3 - 1][2]) + output_bcolors.ENDC)
+
 args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
