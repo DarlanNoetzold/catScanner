@@ -1553,3 +1553,27 @@ elif args_on_cmd.target:
 
             tool = tool + 1
 
+        print(output_bcolors.BG_ENDL_TXT + "[ Preliminary Scan Phase Completed. ]" + output_bcolors.ENDC)
+        print("\n")
+
+        print(output_bcolors.BG_HEAD_TXT + "[ Report Generation Phase Initiated. ]" + output_bcolors.ENDC)
+        if len(vulnerab_list) == 0:
+            print("\t" + output_bcolors.OKGREEN + "No Vulnerabilities Detected." + output_bcolors.ENDC)
+        else:
+            with open("RS-Vulnerability-Report", "a") as report:
+                while (rs_vul < len(vulnerab_list)):
+                    vuln_info = vulnerab_list[rs_vul].split('*')
+                    report.write(vuln_info[arg2])
+                    report.write("\n------------------------\n\n")
+                    temp_report_name = "/tmp/rapidscan_temp_" + vuln_info[arg1]
+                    with open(temp_report_name, 'r') as temp_report:
+                        data = temp_report.read()
+                        report.write(data)
+                        report.write("\n\n")
+                    temp_report.close()
+                    rs_vul = rs_vul + 1
+
+                print(
+                    "\tComplete Vulnerability Report for " + output_bcolors.OKBLUE + target + output_bcolors.ENDC + " named " + output_bcolors.OKGREEN + "`RS-Vulnerability-Report`" + output_bcolors.ENDC + " is available under the same directory CatScanner resides.")
+
+            report.close()
