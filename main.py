@@ -1543,17 +1543,13 @@ elif args_on_cmd.target:
                 control_program.stop()
                 scan_stop = time.time()
                 elapsed = scan_stop - scan_start
-                rs_total_elapsed = rs_total_elapsed + elapsed
-                # sys.stdout.write(CURSOR_UP_ONE)
+                total_elapsed = total_elapsed + elapsed
                 sys.stdout.write(ERASE_ONE_LINE)
-                # print("-" * terminal_size(), end='\r', flush=True)
                 print(output_bcolors.OKBLUE + "\nScan Interrupted in " + timer_displayer(int(elapsed)) + output_bcolors.ENDC, end='\r',
                       flush=True)
                 print(
                     "\n" + output_bcolors.WARNING + "\tTest Skipped. Performing Next. Press Ctrl+Z to Quit CatScanner.\n" + output_bcolors.ENDC)
-                rs_skipped_checks = rs_skipped_checks + 1
+                skipped_checks = skipped_checks + 1
 
             tool = tool + 1
 
-            print(output_bcolors.BG_ENDL_TXT + "[ Preliminary Scan Phase Completed. ]" + output_bcolors.ENDC)
-            print("\n")
