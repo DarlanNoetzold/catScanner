@@ -1577,6 +1577,24 @@ elif args_on_cmd.target:
                     "\tComplete Vulnerability Report for " + output_bcolors.OKBLUE + target + output_bcolors.ENDC + " named " + output_bcolors.OKGREEN + "`RS-Vulnerability-Report`" + output_bcolors.ENDC + " is available under the same directory CatScanner resides.")
 
             report.close()        print("\tTotal Number of Vulnerability Checks Skipped: " + output_bcolors.BOLD + output_bcolors.WARNING + str(
+            report.close()
+        for file_index, file_name in enumerate(tools_used_on_scanner):
+            with open("RS-Debug-ScanLog", "a") as report:
+                try:
+                    with open("/tmp/rapidscan_temp_" + file_name[arg1], 'r') as temp_report:
+                        data = temp_report.read()
+                        report.write(file_name[arg2])
+                        report.write("\n------------------------\n\n")
+                        report.write(data)
+                        report.write("\n\n")
+                    temp_report.close()
+                except:
+                    break
+            report.close()
+
+        print("\tTotal Number of Vulnerability Checks        : " + output_bcolors.BOLD + output_bcolors.OKGREEN + str(
+            len(tools_used_on_scanner)) + output_bcolors.ENDC)
+        print("\tTotal Number of Vulnerability Checks Skipped: " + output_bcolors.BOLD + output_bcolors.WARNING + str(
             skipped_checks) + output_bcolors.ENDC)
         print("\tTotal Number of Vulnerabilities Detected    : " + output_bcolors.BOLD + output_bcolors.BADFAIL + str(
             len(vulnerab_list)) + output_bcolors.ENDC)
