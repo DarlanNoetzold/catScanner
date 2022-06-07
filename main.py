@@ -1576,7 +1576,6 @@ elif args_on_cmd.target:
                 print(
                     "\tComplete Vulnerability Report for " + output_bcolors.OKBLUE + target + output_bcolors.ENDC + " named " + output_bcolors.OKGREEN + "`RS-Vulnerability-Report`" + output_bcolors.ENDC + " is available under the same directory CatScanner resides.")
 
-            report.close()        print("\tTotal Number of Vulnerability Checks Skipped: " + output_bcolors.BOLD + output_bcolors.WARNING + str(
             report.close()
         for file_index, file_name in enumerate(tools_used_on_scanner):
             with open("RS-Debug-ScanLog", "a") as report:
