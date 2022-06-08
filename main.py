@@ -17,6 +17,7 @@ time_intervals = (
     ('s', 1),
 )
 
+
 class output_bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -39,9 +40,11 @@ class output_bcolors:
     BG_SCAN_TXT_START = '\x1b[6;30;42m'
     BG_SCAN_TXT_END = '\x1b[0m'
 
+
 proc_high = output_bcolors.BADFAIL + "●" + output_bcolors.ENDC
 proc_med = output_bcolors.WARNING + "●" + output_bcolors.ENDC
 proc_low = output_bcolors.OKGREEN + "●" + output_bcolors.ENDC
+
 
 def terminal_size():
     try:
@@ -49,6 +52,7 @@ def terminal_size():
         return int(columns)
     except subprocess.CalledProcessError as e:
         return int(20)
+
 
 class control_program:
     busy = False
@@ -69,7 +73,8 @@ class control_program:
         try:
             while self.busy:
                 if not self.disabled:
-                    x = output_bcolors.BG_SCAN_TXT_START + next(self.control_program_generator) + output_bcolors.BG_SCAN_TXT_END
+                    x = output_bcolors.BG_SCAN_TXT_START + next(
+                        self.control_program_generator) + output_bcolors.BG_SCAN_TXT_END
                     inc = inc + 1
                     print(x, end='')
                     if inc > random.uniform(0, terminal_size()):  # 30 init
@@ -101,6 +106,7 @@ class control_program:
             print(
                 "\n\t" + output_bcolors.BG_ERR_TXT + "CatScanner are Quitting..." + output_bcolors.ENDC)
             sys.exit(1)
+
 
 control_program = control_program()
 
@@ -1286,9 +1292,9 @@ total_elapsed = 0
 vulnerab_avail_tools = 0
 skipped_checks = 0
 
-
 tool_checks = (len(tools_used_on_scanner) + len(tool_response_about_scanning) + len(tool_status_and_timing)) / 3
 tool_checks = round(tool_checks)
+
 
 def logo():
     print(output_bcolors.WARNING)
@@ -1308,6 +1314,7 @@ def logo():
     print(logo_ascii)
     print(output_bcolors.ENDC)
 
+
 def vul_info(val):
     result = ''
     if val == 'c':
@@ -1321,6 +1328,7 @@ def vul_info(val):
     else:
         result = output_bcolors.BG_INFO_TXT + " info " + output_bcolors.ENDC
     return result
+
 
 def helper():
     print(output_bcolors.OKBLUE + "Information:" + output_bcolors.ENDC)
@@ -1351,23 +1359,26 @@ def helper():
     print("\t" + vul_info(
         'i') + "    : Not classified as a vulnerability, simply an useful informational alert to be considered.\n")
 
+
 if len(sys.argv) == 1:
     logo()
     helper()
     sys.exit(1)
 
+
 def get_parser_arguments():
     parser_arguments = argparse.ArgumentParser(add_help=False)
     parser_arguments.add_argument('-h', '--help', action='store_true',
-                        help='Show help message and exit.')
+                                  help='Show help message and exit.')
     parser_arguments.add_argument('-u', '--update', action='store_true',
-                        help='Update CatScanner.')
+                                  help='Update CatScanner.')
     parser_arguments.add_argument('-s', '--skip', action='append', default=[],
-                        help='Skip some tools', choices=[t[0] for t in tools])
+                                  help='Skip some tools', choices=[t[0] for t in tools])
     parser_arguments.add_argument('-n', '--nocontrol_program', action='store_true',
-                        help='Disable the idle loader.')
+                                  help='Disable the idle loader.')
     parser_arguments.add_argument('target', nargs='?', metavar='URL', help='URL to scan.', default='', type=str)
     return parser_arguments
+
 
 def is_internet_on():
     os.system('ping -c1 github.com > rs_net 2>&1')
@@ -1378,9 +1389,11 @@ def is_internet_on():
     os.system('rm rs_net > /dev/null 2>&1')
     return val
 
+
 def clear():
     sys.stdout.write("\033[F")
     sys.stdout.write("\033[K")
+
 
 def create_url(url):
     if not re.match(r'http(s?)\:', url):
@@ -1390,6 +1403,7 @@ def create_url(url):
     if host.startswith('www.'):
         host = host[4:]
     return host
+
 
 def timer_displayer(seconds, granularity=3):
     result = []
@@ -1401,21 +1415,23 @@ def timer_displayer(seconds, granularity=3):
             result.append("{}{}".format(value, name))
     return ' '.join(result[:granularity])
 
+
 def vulnerability_tog_infos(v1, v2, v3):
     print(output_bcolors.BOLD + "Vulnerability Threat Level" + output_bcolors.ENDC)
-    print("\t" + vul_info(v2) + " " + output_bcolors.WARNING + str(tool_response_about_scanning[v1][0]) + output_bcolors.ENDC)
+    print("\t" + vul_info(v2) + " " + output_bcolors.WARNING + str(
+        tool_response_about_scanning[v1][0]) + output_bcolors.ENDC)
     print(output_bcolors.BOLD + "Vulnerability Definition" + output_bcolors.ENDC)
     print("\t" + output_bcolors.BADFAIL + str(tools_fix_vuln_rem[v3 - 1][1]) + output_bcolors.ENDC)
     print(output_bcolors.BOLD + "Vulnerability Remediation" + output_bcolors.ENDC)
     print("\t" + output_bcolors.OKGREEN + str(tools_fix_vuln_rem[v3 - 1][2]) + output_bcolors.ENDC)
+
 
 args_on_cmd = get_parser_arguments().parse_args()
 
 if args_on_cmd.nocontrol_program:
     control_program.disabled = True
 
-if args_on_cmd.help or (not args_on_cmd.update \
-                           and not args_on_cmd.target):
+if args_on_cmd.help or (not args_on_cmd.update and not args_on_cmd.target):
     logo()
     helper()
 elif args_on_cmd.update:
@@ -1440,7 +1456,8 @@ elif args_on_cmd.update:
         print("\t" + output_bcolors.OKBLUE + "You already have the latest version of CatScanner." + output_bcolors.ENDC)
     else:
         clear()
-        print("\t" + output_bcolors.OKGREEN + "CatScanner successfully updated to the latest version." + output_bcolors.ENDC)
+        print(
+            "\t" + output_bcolors.OKGREEN + "CatScanner successfully updated to the latest version." + output_bcolors.ENDC)
     control_program.stop()
     sys.exit(1)
 
@@ -1450,11 +1467,12 @@ elif args_on_cmd.target:
     os.system('clear')
     os.system('setterm -cursor off')
     logo()
-    print(output_bcolors.BG_HEAD_TXT + "[ Checking Available Security Scanning Tools Phase... Initiated. ]" + output_bcolors.ENDC)
+    print(
+        output_bcolors.BG_HEAD_TXT + "[ Checking Available Security Scanning Tools Phase... Initiated. ]" + output_bcolors.ENDC)
 
     unavail_tools_names = list()
-    while (rs_avail_tools < len(tools)):
-        precmd = str(tools[rs_avail_tools][arg1])
+    while (vulnerab_avail_tools < len(tools)):
+        precmd = str(tools[vulnerab_avail_tools][arg1])
         try:
             p = subprocess.Popen([precmd], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                  shell=True)
@@ -1464,23 +1482,23 @@ elif args_on_cmd.target:
             print("\t" + output_bcolors.BG_ERR_TXT + "CatScanner was terminated abruptly..." + output_bcolors.ENDC)
             sys.exit(1)
 
-        if b"not found" in val or tools[rs_avail_tools][arg1] in args_on_cmd.skip:
+        if b"not found" in val or tools[vulnerab_avail_tools][arg1] in args_on_cmd.skip:
             if b"not found" in val:
-                print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
+                print("\t" + output_bcolors.OKBLUE + tools[vulnerab_avail_tools][
                     arg1] + output_bcolors.ENDC + output_bcolors.BADFAIL + "...unavailable." + output_bcolors.ENDC)
-            elif tools[rs_avail_tools][arg1] in args_on_cmd.skip:
-                print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
+            elif tools[vulnerab_avail_tools][arg1] in args_on_cmd.skip:
+                print("\t" + output_bcolors.OKBLUE + tools[vulnerab_avail_tools][
                     arg1] + output_bcolors.ENDC + output_bcolors.BADFAIL + "...skipped." + output_bcolors.ENDC)
 
             for scanner_index, scanner_val in enumerate(tools_used_on_scanner):
-                if scanner_val[2] == tools[rs_avail_tools][arg1]:
+                if scanner_val[2] == tools[vulnerab_avail_tools][arg1]:
                     scanner_val[3] = 0
-                    unavail_tools_names.append(tools[rs_avail_tools][arg1])
+                    unavail_tools_names.append(tools[vulnerab_avail_tools][arg1])
 
         else:
-            print("\t" + output_bcolors.OKBLUE + tools[rs_avail_tools][
+            print("\t" + output_bcolors.OKBLUE + tools[vulnerab_avail_tools][
                 arg1] + output_bcolors.ENDC + output_bcolors.OKGREEN + "...available." + output_bcolors.ENDC)
-        rs_avail_tools = rs_avail_tools + 1
+        vulnerab_avail_tools = vulnerab_avail_tools + 1
         clear()
         unavail_tools_names = list(set(unavail_tools_names))
         if len(unavail_tools_names) == 0:
@@ -1489,14 +1507,17 @@ elif args_on_cmd.target:
         else:
             print("\t" + output_bcolors.WARNING + "Some of these tools " + output_bcolors.BADFAIL + str(
                 unavail_tools_names) + output_bcolors.ENDC + output_bcolors.WARNING + " are unavailable or will be skipped. CatScanner will still perform the rest of the tests. Install these tools to fully utilize the functionality of CatScanner." + output_bcolors.ENDC)
-        print(output_bcolors.BG_ENDL_TXT + "[ Checking Available Security Scanning Tools Phase... Completed. ]" + output_bcolors.ENDC)
+        print(
+            output_bcolors.BG_ENDL_TXT + "[ Checking Available Security Scanning Tools Phase... Completed. ]" + output_bcolors.ENDC)
         print("\n")
         print(output_bcolors.BG_HEAD_TXT + "[ Preliminary Scan Phase Initiated... Loaded " + str(
             tool_checks) + " vulnerability checks. ]" + output_bcolors.ENDC)
 
         while (tool < len(tools_used_on_scanner)):
-            print("[" + tool_status_and_timing[tool][arg3] + tool_status_and_timing[tool][arg4] + "] Deploying " + str(tool + 1) + "/" + str(
-                tool_checks) + " | " + output_bcolors.OKBLUE + tools_used_on_scanner[tool][arg2] + output_bcolors.ENDC, )
+            print("[" + tool_status_and_timing[tool][arg3] + tool_status_and_timing[tool][arg4] + "] Deploying " + str(
+                tool + 1) + "/" + str(
+                tool_checks) + " | " + output_bcolors.OKBLUE + tools_used_on_scanner[tool][
+                      arg2] + output_bcolors.ENDC, )
             if tools_used_on_scanner[tool][arg4] == 0:
                 print(output_bcolors.WARNING + "\nScanning Tool Unavailable. Skipping Test...\n" + output_bcolors.ENDC)
                 rs_skipped_checks = rs_skipped_checks + 1
@@ -1508,7 +1529,8 @@ elif args_on_cmd.target:
                 print("\n")
             scan_start = time.time()
             temp_file = "/tmp/rapidscan_temp_" + tools_used_on_scanner[tool][arg1]
-            cmd = tools_used_on_scanner[tool][arg1] + target + tools_used_on_scanner[tool][arg2] + " > " + temp_file + " 2>&1"
+            cmd = tools_used_on_scanner[tool][arg1] + target + tools_used_on_scanner[tool][
+                arg2] + " > " + temp_file + " 2>&1"
 
             try:
                 subprocess.check_output(cmd, shell=True)
@@ -1523,21 +1545,26 @@ elif args_on_cmd.target:
                 elapsed = scan_stop - scan_start
                 rs_total_elapsed = rs_total_elapsed + elapsed
                 sys.stdout.write(ERASE_ONE_LINE)
-                print(output_bcolors.OKBLUE + "\nScan Completed in " + timer_displayer(int(elapsed)) + output_bcolors.ENDC, end='\r',
+                print(output_bcolors.OKBLUE + "\nScan Completed in " + timer_displayer(
+                    int(elapsed)) + output_bcolors.ENDC, end='\r',
                       flush=True)
                 print("\n")
                 # clear()
                 rs_tool_output_file = open(temp_file).read()
                 if tool_status_and_timing[tool][arg2] == 0:
                     if tool_status_and_timing[tool][arg1].lower() in rs_tool_output_file.lower():
-                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2], tool_response_about_scanning[tool][arg3])
-                        vulnerab_list.append(tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
+                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2],
+                                                tool_response_about_scanning[tool][arg3])
+                        vulnerab_list.append(
+                            tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
                 else:
                     if any(i in rs_tool_output_file for i in tool_status_and_timing[tool][arg6]):
                         m = 1
                     else:
-                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2], tool_response_about_scanning[tool][arg3])
-                        vulnerab_list.append(tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
+                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2],
+                                                tool_response_about_scanning[tool][arg3])
+                        vulnerab_list.append(
+                            tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
             else:
                 runTest = 1
                 control_program.stop()
@@ -1545,7 +1572,8 @@ elif args_on_cmd.target:
                 elapsed = scan_stop - scan_start
                 total_elapsed = total_elapsed + elapsed
                 sys.stdout.write(ERASE_ONE_LINE)
-                print(output_bcolors.OKBLUE + "\nScan Interrupted in " + timer_displayer(int(elapsed)) + output_bcolors.ENDC, end='\r',
+                print(output_bcolors.OKBLUE + "\nScan Interrupted in " + timer_displayer(
+                    int(elapsed)) + output_bcolors.ENDC, end='\r',
                       flush=True)
                 print(
                     "\n" + output_bcolors.WARNING + "\tTest Skipped. Performing Next. Press Ctrl+Z to Quit CatScanner.\n" + output_bcolors.ENDC)
@@ -1597,8 +1625,9 @@ elif args_on_cmd.target:
             skipped_checks) + output_bcolors.ENDC)
         print("\tTotal Number of Vulnerabilities Detected    : " + output_bcolors.BOLD + output_bcolors.BADFAIL + str(
             len(vulnerab_list)) + output_bcolors.ENDC)
-        print("\tTotal Time Elapsed for the Scan             : " + output_bcolors.BOLD + output_bcolors.OKBLUE + timer_displayer(
-            int(total_elapsed)) + output_bcolors.ENDC)
+        print(
+            "\tTotal Time Elapsed for the Scan             : " + output_bcolors.BOLD + output_bcolors.OKBLUE + timer_displayer(
+                int(total_elapsed)) + output_bcolors.ENDC)
         print("\n")
         print(
             "\tFor Debugging Purposes, You can view the complete output generated by all the tools named " + output_bcolors.OKBLUE + "`RS-Debug-ScanLog`" + output_bcolors.ENDC + " under the same directory.")
