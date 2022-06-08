@@ -1513,23 +1513,23 @@ elif args_on_cmd.target:
         print(output_bcolors.BG_HEAD_TXT + "[ Preliminary Scan Phase Initiated... Loaded " + str(
             tool_checks) + " vulnerability checks. ]" + output_bcolors.ENDC)
 
-        while (tool < len(tools_used_on_scanner)):
-            print("[" + tool_status_and_timing[tool][arg3] + tool_status_and_timing[tool][arg4] + "] Deploying " + str(
-                tool + 1) + "/" + str(
-                tool_checks) + " | " + output_bcolors.OKBLUE + tools_used_on_scanner[tool][
+        while (tool_head_pointer < len(tools_used_on_scanner)):
+            print("[" + tool_status_and_timing[tool_head_pointer][arg3] + tool_status_and_timing[tool_head_pointer][arg4] + "] Deploying " + str(
+                tool_head_pointer + 1) + "/" + str(
+                tool_checks) + " | " + output_bcolors.OKBLUE + tools_used_on_scanner[tool_head_pointer][
                       arg2] + output_bcolors.ENDC, )
-            if tools_used_on_scanner[tool][arg4] == 0:
+            if tools_used_on_scanner[tool_head_pointer][arg4] == 0:
                 print(output_bcolors.WARNING + "\nScanning Tool Unavailable. Skipping Test...\n" + output_bcolors.ENDC)
-                rs_skipped_checks = rs_skipped_checks + 1
-                tool = tool + 1
+                skipped_checks = skipped_checks + 1
+                tool_head_pointer = tool_head_pointer + 1
                 continue
             try:
                 control_program.start()
             except Exception as e:
                 print("\n")
             scan_start = time.time()
-            temp_file = "/tmp/rapidscan_temp_" + tools_used_on_scanner[tool][arg1]
-            cmd = tools_used_on_scanner[tool][arg1] + target + tools_used_on_scanner[tool][
+            temp_file = "/tmp/rapidscan_temp_" + tools_used_on_scanner[tool_head_pointer][arg1]
+            cmd = tools_used_on_scanner[tool_head_pointer][arg1] + target + tools_used_on_scanner[tool_head_pointer][
                 arg2] + " > " + temp_file + " 2>&1"
 
             try:
@@ -1543,28 +1543,27 @@ elif args_on_cmd.target:
                 control_program.stop()
                 scan_stop = time.time()
                 elapsed = scan_stop - scan_start
-                rs_total_elapsed = rs_total_elapsed + elapsed
+                total_elapsed = total_elapsed + elapsed
                 sys.stdout.write(ERASE_ONE_LINE)
                 print(output_bcolors.OKBLUE + "\nScan Completed in " + timer_displayer(
                     int(elapsed)) + output_bcolors.ENDC, end='\r',
                       flush=True)
                 print("\n")
-                # clear()
                 rs_tool_output_file = open(temp_file).read()
-                if tool_status_and_timing[tool][arg2] == 0:
-                    if tool_status_and_timing[tool][arg1].lower() in rs_tool_output_file.lower():
-                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2],
-                                                tool_response_about_scanning[tool][arg3])
+                if tool_status_and_timing[tool_head_pointer][arg2] == 0:
+                    if tool_status_and_timing[tool_head_pointer][arg1].lower() in rs_tool_output_file.lower():
+                        vulnerability_tog_infos(tool_head_pointer, tool_response_about_scanning[tool_head_pointer][arg2],
+                                                tool_response_about_scanning[tool_head_pointer][arg3])
                         vulnerab_list.append(
-                            tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
+                            tools_used_on_scanner[tool_head_pointer][arg1] + "*" + tools_used_on_scanner[tool_head_pointer][arg2])
                 else:
-                    if any(i in rs_tool_output_file for i in tool_status_and_timing[tool][arg6]):
+                    if any(i in rs_tool_output_file for i in tool_status_and_timing[tool_head_pointer][arg6]):
                         m = 1
                     else:
-                        vulnerability_tog_infos(tool, tool_response_about_scanning[tool][arg2],
-                                                tool_response_about_scanning[tool][arg3])
+                        vulnerability_tog_infos(tool_head_pointer, tool_response_about_scanning[tool_head_pointer][arg2],
+                                                tool_response_about_scanning[tool_head_pointer][arg3])
                         vulnerab_list.append(
-                            tools_used_on_scanner[tool][arg1] + "*" + tools_used_on_scanner[tool][arg2])
+                            tools_used_on_scanner[tool_head_pointer][arg1] + "*" + tools_used_on_scanner[tool_head_pointer][arg2])
             else:
                 runTest = 1
                 control_program.stop()
@@ -1579,7 +1578,7 @@ elif args_on_cmd.target:
                     "\n" + output_bcolors.WARNING + "\tTest Skipped. Performing Next. Press Ctrl+Z to Quit CatScanner.\n" + output_bcolors.ENDC)
                 skipped_checks = skipped_checks + 1
 
-            tool = tool + 1
+            tool_head_pointer = tool_head_pointer + 1
 
         print(output_bcolors.BG_ENDL_TXT + "[ Preliminary Scan Phase Completed. ]" + output_bcolors.ENDC)
         print("\n")
