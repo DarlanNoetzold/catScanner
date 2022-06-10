@@ -1529,6 +1529,7 @@ elif args_on_cmd.target:
                 print("\n")
             scan_start = time.time()
             temp_file = "/tmp/rapidscan_temp_" + tools_used_on_scanner[tool_head_pointer][arg1]
+
             cmd = tools_used_on_scanner[tool_head_pointer][arg1] + target + tools_used_on_scanner[tool_head_pointer][
                 arg2] + " > " + temp_file + " 2>&1"
 
@@ -1549,15 +1550,15 @@ elif args_on_cmd.target:
                     int(elapsed)) + output_bcolors.ENDC, end='\r',
                       flush=True)
                 print("\n")
-                rs_tool_output_file = open(temp_file).read()
+                tool_output_file = open(temp_file).read()
                 if tool_status_and_timing[tool_head_pointer][arg2] == 0:
-                    if tool_status_and_timing[tool_head_pointer][arg1].lower() in rs_tool_output_file.lower():
+                    if tool_status_and_timing[tool_head_pointer][arg1].lower() in tool_output_file.lower():
                         vulnerability_tog_infos(tool_head_pointer, tool_response_about_scanning[tool_head_pointer][arg2],
                                                 tool_response_about_scanning[tool_head_pointer][arg3])
                         vulnerab_list.append(
                             tools_used_on_scanner[tool_head_pointer][arg1] + "*" + tools_used_on_scanner[tool_head_pointer][arg2])
                 else:
-                    if any(i in rs_tool_output_file for i in tool_status_and_timing[tool_head_pointer][arg6]):
+                    if any(i in tool_output_file for i in tool_status_and_timing[tool_head_pointer][arg6]):
                         m = 1
                     else:
                         vulnerability_tog_infos(tool_head_pointer, tool_response_about_scanning[tool_head_pointer][arg2],
