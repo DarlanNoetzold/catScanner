@@ -7,7 +7,7 @@
 * Foi usado como base o Scan RapidScan.
 
 ## Projeto:
-* Este projeto te mcomo objetivo ajudar na busca por vulnabilidades, usando divertos projetos prontos para Scanear sites;
+* Este projeto tem como objetivo ajudar na busca por vulnabilidades, usando divertos projetos prontos para Scanear sites;
 * Este Scanner é apenas uma Proof of Work com o objetivo de estudo apenas.
 
 ## Ferramentas de Scaneamento:
