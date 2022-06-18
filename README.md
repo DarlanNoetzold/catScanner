@@ -8,7 +8,7 @@
 
 ## Projeto:
 * Este projeto tem como objetivo ajudar na busca por vulnerabilidades, usando diversos scripts de ferramentas famosas para Scanear sites;
-* Este Scanner é apenas uma Proof of Work com o objetivo de estudo apenas.
+* Este Scanner é apenas uma Proof of Work com o objetivo de estudo de vulnerabilidades e como identificá-las, tal conhecimento pode ser usado em qualquer projeto Web como prevenção de ataques e vazamentos.
 
 ## Ferramentas de Scaneamento:
 tools = [
