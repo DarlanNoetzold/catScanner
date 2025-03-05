@@ -1,25 +1,25 @@
 # catScanner
  A vulnerability scanner
 
-## Desenvolvimento:
-* Foi usado Python 3.8 como linguagem base;
-* Foram usado bibliotecas auxiliares para auxilio no desenvolvimento (threading, subprocess, argparser ...);
-* Foi usado como base o Scan RapidScan.
+## Development:
+* Python 3.8 was used as the base language;
+* Auxiliary libraries were used to aid development (threading, subprocess, argparser ...);
+* The RapidScan scan was used as a basis.
 
-## Projeto:
-* Este projeto tem como objetivo ajudar na busca por vulnerabilidades, usando diversos scripts de ferramentas famosas para Scanear sites;
-* Este Scanner é apenas uma Proof of Work com o objetivo de estudo de vulnerabilidades e como identificá-las, tal conhecimento pode ser usado em qualquer projeto Web como prevenção de ataques e vazamentos.
+## Project:
+* This project aims to help in the search for vulnerabilities, using several scripts from famous tools to scan websites;
+* This Scanner is just a Proof of Work with the aim of studying vulnerabilities and how to identify them, this knowledge can be used in any Web project to prevent attacks and leaks.
 
-## Ferramentas de Scaneamento:
+## Scanning Tools:
 tools = [
     ["wapiti"], ["whatweb"], ["nmap"], ["golismero"], ["host"], ["wget"], ["uniscan"], ["wafw00f"], ["dirb"],
     ["davtest"], ["theHarvester"], ["xsser"], ["dnsrecon"], ["fierce"], ["dnswalk"], ["whois"], ["sslyze"], ["lbd"],
     ["golismero"], ["dnsenum"], ["dmitry"], ["davtest"], ["nikto"], ["dnsmap"], ["amass"]
 ]
 
-## Como executar:
-* Este projeto foi desenvolvido e testado em um ambiente kali, portanto é recomedável o uso do mesmo;
-* Para executálo basta baixá-lo e na raiz do projeto executar: python ./main www.example.com
+## How to execute:
+* This project was developed and tested in a kali environment, therefore it is recommended to use it;
+* To run it, just download it and run it in the root of the project: python ./main www.example.com
 
 ---
 
